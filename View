@@ -1,0 +1,64 @@
+erDiagram
+    HARDWARE ||--o{ WARTUNG : "wird gewartet"
+    HARDWARE ||--o{ GERAET_MITARBEITER : "wird genutzt von"
+    HARDWARE ||--|| HERSTELLER : "wird hergestellt von"
+    HARDWARE ||--|| GERAETETYP : "ist vom Typ"
+    MITARBEITER ||--o{ GERAET_MITARBEITER : "nutzt"
+    MITARBEITER }|--|| ABTEILUNG : "gehört zu"
+    
+    HARDWARE {
+        int hardware_id PK
+        int hersteller_id FK
+        int geraetetyp_id FK
+        string bezeichnung
+        string modell
+        string seriennummer
+        string prozessor
+        int arbeitsspeicher
+        int festplattenspeicher
+        string betriebssystem
+        int akkulaufzeit
+        date kaufdatum
+        boolean aktiv
+    }
+    
+    HERSTELLER {
+        int hersteller_id PK
+        string name
+        string kontaktdaten
+    }
+    
+    GERAETETYP {
+        int geraetetyp_id PK
+        string bezeichnung
+    }
+    
+    WARTUNG {
+        int wartung_id PK
+        int hardware_id FK
+        date wartungsdatum
+        string beschreibung
+        string durchgefuehrt_von
+    }
+    
+    MITARBEITER {
+        int mitarbeiter_id PK
+        int abteilung_id FK
+        string vorname
+        string nachname
+        string email
+    }
+    
+    ABTEILUNG {
+        int abteilung_id PK
+        string bezeichnung
+        string kostenstelle
+    }
+    
+    GERAET_MITARBEITER {
+        int geraet_mitarbeiter_id PK
+        int hardware_id FK
+        int mitarbeiter_id FK
+        date ausgabedatum
+        date rueckgabedatum
+    }
